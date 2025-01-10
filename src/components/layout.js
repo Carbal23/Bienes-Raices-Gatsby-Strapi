@@ -1,49 +1,69 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
- */
-
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Global, css } from "@emotion/react"
 
 import Header from "./header"
-import "./layout.css"
+import Footer from "./footer"
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
+      <Global
+        styles={css`
+          html {
+            font-size: 62.5%;
+            box-sizing: border-box;
+          }
+
+          *,
+          *:before,
+          *:after {
+            box-sizing: inherit;
+          }
+
+          body {
+            font-size: 1.6rem;
+            line-height: 2;
+            font-family: "Lato", sans-serif;
+          }
+
+          h1,
+          h2,
+          h3 {
+            margin: 0;
+            line-height: 1.5;
+          }
+
+          h1,
+          h2 {
+            text-align: center;
+            font-family: "Lato", sans-serif;
+            font-family: 300;
+          }
+
+          h3 {
+            font-family: "Roboto", sans-serif;
+          }
+
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          }
+
+          .contenedor {
+            max-width: 120rem;
+            margin: 0 auto;
+            width: 95%;
+          }
+
+          img {
+            max-width: 100%;
+          }
+        `}
+      />
+      <Header />
+      {children}
+      <Footer />
     </>
   )
 }
